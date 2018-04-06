@@ -83,7 +83,7 @@ open class PasswordDotView: UIView {
         let maxShakeCount = 5
         let centerX = bounds.midX
         let centerY = bounds.midY
-        var duration = 0.10
+        var duration = 0.075
         var moveX: CGFloat = 5
         
         if shakeCount == 0 || shakeCount == maxShakeCount {
