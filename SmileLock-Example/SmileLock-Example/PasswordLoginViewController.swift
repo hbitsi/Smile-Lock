@@ -28,6 +28,8 @@ class PasswordLoginViewController: UIViewController {
         //customize password UI
         passwordContainerView.tintColor = UIColor.color(.textColor)
         passwordContainerView.highlightedColor = UIColor.color(.blue)
+        passwordContainerView.isVibrancyEffect = true
+        view.backgroundColor = UIColor.hexStr("fbc241")
     }
 }
 

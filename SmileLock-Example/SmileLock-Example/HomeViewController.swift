@@ -11,13 +11,19 @@ import UIKit
 class HomeViewController: UIViewController {
     
     //MARK: Property
-    let isBlurUI = true
+    let isBlurUI = false
     
     var loginVCID: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loginVCID = isBlurUI ? "BlurPasswordLoginViewController" : "PasswordLoginViewController"
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        present(loginVCID)
     }
     
     @IBAction func presentLoginVC(_ sender: AnyObject) {
