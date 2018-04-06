@@ -20,8 +20,8 @@ open class PasswordInputView: UIView {
     let circleView = UIView()
     let button = UIButton()
     open let label = UILabel()
-    fileprivate let fontSizeRatio: CGFloat = 46 / 40
-    fileprivate let borderWidthRatio: CGFloat = 1 / 26
+    fileprivate let fontSizeRatio: CGFloat = 25 / 40
+    fileprivate let borderWidth: CGFloat = 1
     fileprivate var touchUpFlag = false
     fileprivate(set) open var isAnimating = false
     var isVibrancyEffect = false
@@ -102,7 +102,6 @@ open class PasswordInputView: UIView {
         let height = bounds.height
         let center = CGPoint(x: width/2, y: height/2)
         let radius = min(width, height) / 2
-        let borderWidth = radius * borderWidthRatio
         let circleRadius = radius - borderWidth
         
         //update label
@@ -147,8 +146,8 @@ private extension PasswordInputView {
     
     //MARK: Animation
     func touchDownAction() {
-        let originFont = label.font
-        label.font = UIFont.systemFont(ofSize: originFont!.pointSize, weight: UIFont.Weight.light)
+//        let originFont = label.font
+//        label.font = UIFont.systemFont(ofSize: originFont!.pointSize, weight: UIFont.Weight.light)
         label.textColor = highlightTextColor
         if !self.isVibrancyEffect {
             backgroundColor = highlightBackgroundColor
