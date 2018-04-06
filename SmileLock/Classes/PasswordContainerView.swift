@@ -234,7 +234,7 @@ private extension PasswordContainerView {
             fillColor = whiteColor
             //input view
             circleBackgroundColor = clearColor
-            highlightBackgroundColor = whiteColor
+            highlightBackgroundColor = UIColor(white: 1, alpha: 0.7)
             borderColor = clearColor
             textColor = whiteColor
             highlightTextColor = whiteColor
