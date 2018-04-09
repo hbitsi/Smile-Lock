@@ -34,9 +34,9 @@ open class PasswordContainerView: UIView {
     fileprivate var inputString: String = "" {
         didSet {
             #if swift(>=3.2)
-                passwordDotView.inputDotCount = inputString.count
+            passwordDotView.inputDotCount = inputString.count
             #else
-                passwordDotView.inputDotCount = inputString.characters.count
+            passwordDotView.inputDotCount = inputString.characters.count
             #endif
             
             checkInputComplete()
@@ -169,19 +169,23 @@ open class PasswordContainerView: UIView {
     //MARK: IBAction
     @IBAction func deleteInputString(_ sender: AnyObject) {
         #if swift(>=3.2)
-            guard inputString.count > 0 && !passwordDotView.isFull else {
-                return
-            }
-            inputString = String(inputString.dropLast())
-        #else
-            guard inputString.characters.count > 0 && !passwordDotView.isFull else {
+        guard inputString.count > 0 && !passwordDotView.isFull else {
             return
-            }
-            inputString = String(inputString.characters.dropLast())
+        }
+        inputString = String(inputString.dropLast())
+        #else
+        guard inputString.characters.count > 0 && !passwordDotView.isFull else {
+        return
+        }
+        inputString = String(inputString.characters.dropLast())
         #endif
     }
     
     @IBAction func touchAuthenticationAction(_ sender: UIButton) {
+        biometricAuthentication()
+    }
+    
+    open func biometricAuthentication() {
         guard isTouchAuthenticationAvailable else { return }
         touchIDContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: touchAuthenticationReason) { (success, error) in
             DispatchQueue.main.async {
@@ -199,13 +203,13 @@ open class PasswordContainerView: UIView {
 private extension PasswordContainerView {
     func checkInputComplete() {
         #if swift(>=3.2)
-            if inputString.count == passwordDotView.totalDotCount {
-                delegate?.passwordInputComplete(self, input: inputString)
-            }
-        #else
-            if inputString.characters.count == passwordDotView.totalDotCount {
+        if inputString.count == passwordDotView.totalDotCount {
             delegate?.passwordInputComplete(self, input: inputString)
-            }
+        }
+        #else
+        if inputString.characters.count == passwordDotView.totalDotCount {
+        delegate?.passwordInputComplete(self, input: inputString)
+        }
         #endif
     }
     
@@ -272,15 +276,15 @@ private extension PasswordContainerView {
 extension PasswordContainerView: PasswordInputViewTappedProtocol {
     public func passwordInputView(_ passwordInputView: PasswordInputView, tappedString: String) {
         #if swift(>=3.2)
-            guard inputString.count < passwordDotView.totalDotCount else {
-                return
-            }
-        #else
-            guard inputString.characters.count < passwordDotView.totalDotCount else {
+        guard inputString.count < passwordDotView.totalDotCount else {
             return
-            }
+        }
+        #else
+        guard inputString.characters.count < passwordDotView.totalDotCount else {
+        return
+        }
         #endif
-
+        
         inputString += tappedString
     }
 }
